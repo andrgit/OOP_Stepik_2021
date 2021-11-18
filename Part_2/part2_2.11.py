@@ -8,10 +8,18 @@ class User:
         self.login = login
         self.password = password  # был __password, но после появления settera, убираем __ тем самым сразу запускаем
         # функцию проверки def password, и в конце когда функция отработает, пароль устанавливается
+        self.__secret = "abracadabra"
+
+    def secret(self):
+        s = input("Введите ваш пароль:")
+        if s == self.password:
+            return self.__secret
+        else:
+            raise ValueError("Доступ закрыт")
 
     @property
     def password(self):
-        print("getter")
+        print("сработал getter")#метка того что срабатывает getter
         return self.__password
 
     @staticmethod
@@ -23,7 +31,7 @@ class User:
 
     @password.setter
     def password(self, new_password):
-        print("setter new password")
+        print("сработал setter new password")#Метка того что срабатывает setter
         if not isinstance(new_password, str):
             raise TypeError("Пароль должен быть строкой")
         if len(new_password) < 4:
